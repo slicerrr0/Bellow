@@ -1,3 +1,7 @@
+'''Contains an instance of `celery.Celery` used to process
+payment requests and verification.
+'''
+
 from celery import Celery
 
 app = Celery(
