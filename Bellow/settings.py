@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
     'home',
     'account',
 ]
@@ -132,3 +133,6 @@ LOGIN_URL = 'account:login'
 
 # Celery configuration options
 CELERY_BROKER_URL = ''
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'default'   # Uses the cache specified in `CACHES`
+
