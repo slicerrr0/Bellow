@@ -14,7 +14,7 @@ def index(request):
 def sign_in(request):
     '''Processes information sent by the user from the log-in page.
     
-    This view accepts only 'POST' method requests.
+    This view accepts only 'POST' method HTTP requests.
     '''
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('home:index'))
