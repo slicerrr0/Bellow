@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'home',
     'account',
+    'community',
+    'post',
     'escrow',
     'api',
 ]
