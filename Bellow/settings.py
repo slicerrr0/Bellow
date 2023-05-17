@@ -129,3 +129,6 @@ AUTH_USER_MODEL = 'account.CustomUser'
 
 # Establish absolute login url
 LOGIN_URL = 'account:login'
+
+# Celery configuration options
+CELERY_BROKER_URL = ''
