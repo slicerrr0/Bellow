@@ -11,13 +11,6 @@ from django.utils.translation import gettext_lazy as _
 class UsernameOrEmailValidator(EmailValidator):
     '''Checks if the value is a valid username or email.'''
     username_regex = '[a-zA-Z0-9_]+'
-    def __init__(
-            self,
-            message: _ErrorMessage | None = ...,
-            code: str | None = ..., 
-            whitelist: Collection[str] | None = ...
-        ) -> None:
-        super().__init__(message, code, whitelist)
     def __call__(self, value: str | None) -> None:
         # If value is not formatted as an email, verify it as a username first
         if not '@' in value and re.search(self.username_regex, value) is not None:
