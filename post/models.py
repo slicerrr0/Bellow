@@ -30,7 +30,7 @@ class Flair(models.Model):
     text = models.CharField(max_length=24, help_text='Flair message.')
 
 class Post(models.Model, SubmissionMixin):
-    author = models.ForeignKey(CustomUser, on_delete=models.PROTECT, help_text='User that made the post.')
+    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, help_text='User that made the post.')
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
     created_at = models.DateTimeField(help_text='Date and time the post was created.')
     flair = models.ForeignKey(Flair, blank=True, null=True, on_delete=models.PROTECT, help_text='Optional post flair.')
