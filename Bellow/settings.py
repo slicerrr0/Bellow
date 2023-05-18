@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'account',
     'community',
     'post',
+    'comment',
     'escrow',
     'api',
 ]

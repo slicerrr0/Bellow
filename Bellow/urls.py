@@ -22,6 +22,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('post/', include('post.urls')),
     path('community/', include('community.urls')),
+    path('comment/', include('comment.urls')),
     path('escrow/', include('escrow.urls'))
     
 ]
