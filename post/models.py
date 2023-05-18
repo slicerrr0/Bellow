@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import validate_image_file_extension
 from account.models import CustomUser
+from community.models import Community
 from .choices import FlairColors
 from .validators import flair_validator
 
@@ -13,6 +14,7 @@ class Flair(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.PROTECT, help_text='User that made the post.')
+    community = models.ForeignKey(Community, on_delete=models.CASCADE)
     created_at = models.DateTimeField(help_text='Date and time the post was created.')
     flair = models.ForeignKey(Flair, blank=True, null=True, on_delete=models.PROTECT, help_text='Optional post flair.')
     message = models.TextField(max_length=1000, help_text='Post content.')
