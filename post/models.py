@@ -3,7 +3,6 @@ from django.core.validators import validate_image_file_extension
 from django.utils.translation import gettext_lazy as _
 from account.models import CustomUser
 from community.models import Community
-from .validators import flair_validator
 from .mixins import SubmissionMixin
 
 # Create your models here.
@@ -26,7 +25,7 @@ class Flair(models.Model):
         help_text='Flair color.', 
         choices=FlairColor.choices,
         default=FlairColor.NONE, 
-        validators=[flair_validator])
+    )
     text = models.CharField(max_length=24, help_text='Flair message.')
 
 class Post(models.Model, SubmissionMixin):
