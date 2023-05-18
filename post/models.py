@@ -40,7 +40,7 @@ class Post(models.Model, SubmissionMixin):
         Flair, 
         blank=True, 
         null=True, 
-        on_delete=models.PROTECT, 
+        on_delete=models.CASCADE, 
         help_text='Optional post flair.'
     )
     message = models.TextField(max_length=1000, help_text='Post content.')
