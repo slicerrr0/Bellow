@@ -1,8 +1,8 @@
 from django.db import models
 from django.core.validators import validate_image_file_extension
+from django.utils.translation import gettext_lazy as _
 from account.models import CustomUser
 from community.models import Community
-from .choices import FlairColors
 from .validators import flair_validator
 from .mixins import SubmissionMixin
 
@@ -10,7 +10,23 @@ from .mixins import SubmissionMixin
 
 class Flair(models.Model):
     '''Custom messages or descriptors for tagging posts.'''
-    color = models.CharField(max_length=6, help_text='Flair color.', choices=FlairColors.create_choices(), validators=[flair_validator])
+    class FlairColor(models.TextChoices):
+        NONE = None, _('None')
+        RED = 'Red', _('Red')
+        BLUE = 'Blue', _('Blue')
+        GREEN = 'Green', _('Green')
+        YELLOW = 'Yellow', _('Yellow')
+        ORANGE = 'Orange', _('Orange')
+        PURPLE = 'Purple', _('Purple')
+        BROWN = 'Brown', _('Brown')
+        BLACK = 'Black', _('Black')
+    
+    color = models.CharField(
+        max_length=6, 
+        help_text='Flair color.', 
+        choices=FlairColor.choices,
+        default=FlairColor.NONE, 
+        validators=[flair_validator])
     text = models.CharField(max_length=24, help_text='Flair message.')
 
 class Post(models.Model, SubmissionMixin):
