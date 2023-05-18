@@ -34,6 +34,7 @@ class Post(models.Model, SubmissionMixin):
     created_at = models.DateTimeField(help_text='Date and time the post was created.')
     flair = models.ForeignKey(Flair, blank=True, null=True, on_delete=models.PROTECT, help_text='Optional post flair.')
     message = models.TextField(max_length=1000, help_text='Post content.')
+    voters = models.ManyToManyField(CustomUser, null=True, help_text='Users that have upvoted or downvoted this post.')
     score = models.IntegerField(default=0, help_text='Net sum of upvotes and downvotes this post has received.')
     fire_index = models.IntegerField(default=0, help_text='Net change to score over the past day. Used to sort by "hotness".')
 
