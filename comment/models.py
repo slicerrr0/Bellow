@@ -8,6 +8,7 @@ from post.mixins import SubmissionMixin
 class Comment(models.Model, SubmissionMixin):
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
     author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
+    parent = models.ForeignKey("Comment", on_delete=models.SET_DEFAULT, default=None)  # Recursive relationship
     message = models.TextField(max_length=200, help_text='Comment content.')
     voters = models.ManyToManyField(
         CustomUser, 
