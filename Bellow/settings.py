@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'comment',
     'escrow',
     'api',
+    'algorithm',
 ]
 
 MIDDLEWARE = [

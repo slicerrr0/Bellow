@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import validate_image_file_extension
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 from account.models import CustomUser
 from community.models import Community
 from .mixins import SubmissionMixin
@@ -31,13 +32,13 @@ class Flair(models.Model):
 class Post(models.Model, SubmissionMixin):
     author = models.ForeignKey(
         CustomUser, 
-        on_delete=models.SET_DEFAULT,
-        default=None,
+        on_delete=models.SET_NULL,
+        null=True,
         help_text='User that made the post.',
         related_name='post_user'
     )
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(help_text='Date and time the post was created.')
+    created_at = models.DateTimeField(default=timezone.now, help_text='Date and time the post was created.')
     flair = models.ForeignKey(
         Flair, 
         blank=True, 
