@@ -1,6 +1,6 @@
 from django.urls import path
 
-app_name = 'escrow'
+app_name = 'api'
 urlpatterns = [
     
 ]

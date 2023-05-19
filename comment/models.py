@@ -7,17 +7,18 @@ from post.mixins import SubmissionMixin
 
 class Comment(models.Model, SubmissionMixin):
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
-    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
+    author = models.ForeignKey(CustomUser, on_delete=models.SET_DEFAULT, default=None, related_name='comment_user')
     parent = models.ForeignKey("Comment", on_delete=models.SET_DEFAULT, default=None)  # Recursive relationship
     message = models.TextField(max_length=200, help_text='Comment content.')
-    voters = models.ManyToManyField(
+    upvotes = models.ManyToManyField(
         CustomUser, 
-        null=True, 
-        help_text='Users that have upvoted or downvoted the comment.'
+        help_text='Users who have upvoted this comment.',
+        related_name='comment_upvoters'
     )
-    score = models.IntegerField(
-        default=0, 
-        help_text='Net sum of upvotes and downvotes this comment has received.'
+    downvotes = models.ManyToManyField(
+        CustomUser, 
+        help_text='Users who have downvoted this comment.',
+        related_name='comment_downvoters'
     )
     fire_index = models.IntegerField(
         default=0, 

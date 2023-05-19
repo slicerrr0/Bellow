@@ -31,8 +31,10 @@ class Flair(models.Model):
 class Post(models.Model, SubmissionMixin):
     author = models.ForeignKey(
         CustomUser, 
-        on_delete=models.SET_NULL, 
-        help_text='User that made the post.'
+        on_delete=models.SET_DEFAULT,
+        default=None,
+        help_text='User that made the post.',
+        related_name='post_user'
     )
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
     created_at = models.DateTimeField(help_text='Date and time the post was created.')
@@ -44,14 +46,15 @@ class Post(models.Model, SubmissionMixin):
         help_text='Optional post flair.'
     )
     message = models.TextField(max_length=1000, help_text='Post content.')
-    voters = models.ManyToManyField(
+    upvotes = models.ManyToManyField(
         CustomUser, 
-        null=True, 
-        help_text='Users that have upvoted or downvoted this post.'
+        help_text='Users who have upvoted this post.',
+        related_name='post_upvoters'
     )
-    score = models.IntegerField(
-        default=0, 
-        help_text='Net sum of upvotes and downvotes this post has received.'
+    downvotes = models.ManyToManyField(
+        CustomUser, 
+        help_text='Users who have downvoted this post.',
+        related_name='post_downvoters'
     )
     fire_index = models.IntegerField(
         default=0, 
