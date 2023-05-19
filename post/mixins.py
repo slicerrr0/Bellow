@@ -9,3 +9,16 @@ class SubmissionMixin:
         the model.
         '''
         self.fire_index = 0
+    def get_attribute_from_submission(self, submission: object, attr_name: str):
+        '''Returns a specified attribute value for a submission.
+        This method may be used to access what Community a post belongs to
+        or what user made a comment.
+
+        The existence of parameter `submission` within the database should be verified
+        prior to the invocation of this method.
+        
+        :param submission: Submission.
+        
+        :param attr_name: Specifies what field name to index `submission` for.
+        '''
+        return submission.__getattribute__(attr_name)
